@@ -1,0 +1,31 @@
+---
+import SEO from "../ui/SEO.astro"
+import { Navbar } from "../ui/navbar"
+import { blue_scrollbar_class } from "../ui/scrollbar_"
+import "../css/tailwind.css"
+export interface Props {
+    title: string
+    description: string
+    image?: string
+}
+
+const { title, description, image } = Astro.props as Props
+---
+
+<html lang="en">
+
+<head>
+    <SEO title={title} description={description} image={image} />
+</head>
+
+<body class={`w-full min-h-screen flex flex-col items-center bg-white dark:bg-slate-900 bg-graph-paper-slate-200
+    dark:bg-graph-paper-slate-800/80 ${blue_scrollbar_class}`}>
+    <section
+        class="w-full min-h-screen bg-radial from-white/20 via-white/60 to-white dark:from-slate-700/20 dark:via-slate-800/60 dark:to-slate-900 flex flex-col items-center">
+        <!-- 64rem 1024px 5xl -->
+        <Navbar client:idle />
+        <slot></slot>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{
+    "name": "@example/component",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "astro --root demo dev",
+        "build": "astro --root demo build",
+        "serve": "astro --root demo preview"
+    },
+    "devDependencies": {
+        "@tailwindcss/typography": "^0.5.4",
+        "astro": "^1.0.0-beta.73",
+        "mini-svg-data-uri": "^1.4.4",
+        "tailwindcss": "^3.1.6"
+    }
+}

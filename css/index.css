@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .global-max-width {
+        @apply md:max-w-5xl 
+        /* [@media(min-width:1366px)]:max-w-7xl */
+        /* [@media(min-width:20rem)]:max-w-[19rem]
+        [@media(min-width:24rem)]:max-w-[23rem]
+        [@media(min-width:28rem)]:max-w-[27rem]
+        [@media(min-width:32rem)]:max-w-[28rem]
+        [@media(min-width:36rem)]:max-w-[30rem]
+        [@media(min-width:42rem)]:max-w-[36rem]
+        [@media(min-width:48rem)]:max-w-[40rem]
+        [@media(min-width:56rem)]:max-w-[48rem]
+        [@media(min-width:64rem)]:max-w-[56rem]
+        [@media(min-width:72rem)]:max-w-[64rem]
+        [@media(min-width:80rem)]:max-w-[72rem]
+        [@media(min-width:88rem)]:max-w-[80rem]; */
+    }
+}
+
+/* Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+@layer base {
+    :root {
+        --astro-code-color-text: theme('colors.blue.500');
+        --astro-code-color-background: theme('colors.slate.50');
+        --astro-code-token-constant: theme('colors.indigo.600');
+        --astro-code-token-string: theme('colors.green.500');
+        --astro-code-token-comment: theme('colors.stone.400');
+        --astro-code-token-keyword: theme('colors.slate.800');
+        --astro-code-token-parameter: #AA0000;
+        --astro-code-token-function: theme('colors.indigo.900');
+        --astro-code-token-string-expression: theme('colors.teal.300');
+        --astro-code-token-punctuation: theme('colors.slate.600');
+        --astro-code-token-link: #EE0000;
+    }
+    .dark {
+        --astro-code-color-text: theme('colors.cyan.400');
+        --astro-code-color-background: theme('colors.slate.1000');
+        --astro-code-token-constant: theme('colors.purple.600');
+        --astro-code-token-string: theme('colors.teal.400');
+        --astro-code-token-comment: theme('colors.slate.700');
+        --astro-code-token-keyword: #fff;
+        --astro-code-token-parameter: #AA0000;
+        --astro-code-token-function: theme('colors.slate.400');
+        --astro-code-token-string-expression: theme('colors.teal.500');
+        --astro-code-token-punctuation: theme('colors.slate.200');
+        --astro-code-token-link: #EE0000;
+    }
+}

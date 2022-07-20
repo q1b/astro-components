@@ -1,0 +1,110 @@
+---
+export interface Props {
+    class?: string
+    col?: boolean
+    reverse?: boolean
+    center?: boolean
+    top?: boolean
+    left?: boolean
+    bottom?: boolean
+    right?: boolean
+    stretchX?: boolean
+    stretchY?: boolean
+    apart?: boolean | 'loosely' | 'closely'
+}
+
+let { center, col, apart, reverse, top, left, bottom, right, class: classStr, stretchX, stretchY } = Astro.props as Props
+
+let temp;
+if (col) {
+    temp = top;
+    top = left;
+    left = temp;
+
+    temp = bottom;
+    bottom = right;
+    right = temp;
+}
+---
+
+<style is:global>
+    .flex {
+        display: flex;
+    }
+
+    .flex-col {
+        flex-direction: column;
+    }
+
+    .flex-row-reverse {
+        flex-direction: row-reverse;
+    }
+
+    .flex-col-reverse {
+        flex-direction: column-reverse;
+    }
+
+    .items-start {
+        align-items: flex-start;
+    }
+
+    .items-end {
+        align-items: flex-end;
+    }
+
+    .items-center {
+        align-items: center;
+    }
+
+    .items-stretch {
+        align-items: stretch;
+    }
+
+    .justify-start {
+        justify-content: flex-start;
+    }
+
+    .justify-end {
+        justify-content: flex-end;
+    }
+
+    .justify-center {
+        justify-content: center;
+    }
+
+    .justify-between {
+        justify-content: space-between;
+    }
+
+    .justify-around {
+        justify-content: space-around;
+    }
+
+    .justify-evenly {
+        justify-content: space-evenly;
+    }
+
+    @media (min-width: 640px) {
+        .sm\:items-start {
+            align-items: flex-start;
+        }
+    }
+
+    .\[\&\>\*\]\:grow>* {
+        flex-grow: 1;
+    }
+</style>
+<div class:list={['flex',{ 'flex-col' :col && !reverse, 'flex-col-reverse' :col && reverse, 'flex-row-reverse' :!col &&
+    reverse, 'items-start justify-start' : top && left, 'items-start justify-center' : top &&
+    center, 'items-start justify-end' : top && right, 'items-center justify-start' : center &&
+    left, 'items-center justify-end' : center && right, 'items-end justify-start' : bottom &&
+    left, 'items-end justify-center' : bottom && center, 'items-end justify-end' : bottom &&
+    right, 'items-center justify-center' : center && !top && !bottom && !right && !left, 'items-stretch' : col &&
+    stretchX, '[&>*]:grow' : !col && stretchX, '[&>*]:grow ' : col && stretchY, 'justify-stretch' : !col &&
+    stretchY, 'justify-between' : apart && apart !=='closely' && apart !=='loosely' , 'justify-around'
+    :apart==='loosely' , 'justify-evenly' : apart==='closely' , },{ 'items-start justify-center' : top && !center &&
+    !bottom && !right && !left, 'items-end justify-center' : bottom && !top && !center && !right &&
+    !left, 'items-center justify-start' : left && !top && !bottom && !right && !center, 'items-center justify-end' :
+    right && !top && !bottom && !center && !left, },classStr]}>
+    <slot />
+</div>

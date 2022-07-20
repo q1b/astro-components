@@ -1,0 +1,23 @@
+{
+    "name": "position-component",
+    "version": "0.0.1",
+    "private": true,
+    "type": "module",
+    "exports": {
+        ".": "./index.js",
+        "./Position": "./Position.astro"
+    },
+    "files": [
+        "index.js",
+        "Position.astro"
+    ],
+    "keywords": [
+        "astro-component",
+        "layout",
+        "unstyled",
+        "headless",
+        "reuseable",
+        "css-based",
+        "mordern-css-based-component"
+    ]
+}

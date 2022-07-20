@@ -1,0 +1,80 @@
+---
+import "../css/index.css"
+import SEO from "../ui/SEO.astro"
+import { Navbar } from "../ui/navbar"
+import { TOC } from "../ui/toc"
+import "../css/tailwind.css"
+export interface Props {
+    content: {
+        title: string
+        description: string
+        publishedOn: string
+        heroImage?: {
+            src: string
+            alt: string
+        }
+        astro: {
+            headers: { depth: number; slug: string; text: string }[]
+        }
+    }
+}
+
+const { content } = Astro.props
+const { title, description, publishedOn, heroImage } = content
+const headers: { depth: number; slug: string; text: string }[] =
+    content?.astro?.headers
+
+const date = new Date(publishedOn)
+function formatDate(date: Date) {
+    return new Intl.DateTimeFormat("en", {
+        dateStyle: "long",
+    }).format(date)
+}
+
+//classList={{
+//	"pr-1.5 border-r-0": j() === 3,
+//	"pl-1.5": j() === 0,
+// }}
+//classList={{
+//	"pr-1.5 border-r-0": i === 3,
+//	"pl-1.5": i === 0,
+//}}
+---
+
+<html lang="en">
+
+<head>
+    <SEO title={title} description={description} image={heroImage?.src} />
+</head>
+
+<body class="w-full min-h-screen flex flex-col items-center bg-white dark:bg-slate-900">
+    <svg class="pointer-events-none fixed isolate z-50 opacity-40 dark:opacity-70 mix-blend-multiply dark:mix-blend-soft-light"
+        width="100%" height="100%">
+        <filter id="pedroduarteisalegend">
+            <feTurbulence type="fractalNoise" baseFrequency="0.80" numOctaves="4" stitchTiles="stitch"></feTurbulence>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#pedroduarteisalegend)"></rect>
+    </svg>
+    <!-- 64rem 1024px 5xl -->
+    <Navbar client:idle />
+    <div class="px-1 sm:px-4 global-max-width w-full">
+        <section
+            class="relative rounded-md w-full flex flex-row overflow-y-auto overflow-x-hidden h-[calc(100vh-112px)] scrollbar:w-2 scrollbar:bg-transparent scrollbar-track:bg-blue-300 scrollbar-track:rounded-xl scrollbar-thumb:bg-clip-content scrollbar-thumb:bg-blue-900 scrollbar-thumb:rounded-xl scrollbar-thumb:border-2">
+            <main
+                class="prose shrink-0 md:shrink sm:prose-base md:prose-lg lg:prose-xl xl:prose-2xl sm:max-w-none dark:prose-invert prose-h1:select-none prose-h1:scroll-m-9 w-full">
+                <dl>
+                    <dt class="sr-only">Published On</dt>
+                    <dd class="font-medium italic pl-1 text-slate-400 dark:text-slate-600">
+                        <!-- <time datetime="2021-09-30T19:00">September 30, 2021</time> -->
+                        <time datetime={date.toISOString()}>{formatDate(date)}
+                        </time>
+                    </dd>
+                </dl>
+                <slot></slot>
+            </main>
+            <TOC headers={headers} client:load />
+        </section>
+    </div>
+</body>
+
+</html>
