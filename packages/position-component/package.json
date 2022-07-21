@@ -1,23 +1,34 @@
 {
-    "name": "position-component",
-    "version": "0.1.0",
-    "private": false,
-    "type": "module",
-    "exports": {
-        ".": "./index.js",
-        "./Position": "./Position.astro"
-    },
-    "files": [
-        "index.js",
-        "Position.astro"
-    ],
-    "keywords": [
-        "astro-component",
-        "layout",
-        "unstyled",
-        "headless",
-        "reuseable",
-        "css-based",
-        "mordern-css-based-component"
-    ]
+	"name": "position-component",
+	"version": "0.1.0",
+	"private": false,
+	"type": "module",
+	"exports": {
+		".": "./index.js",
+		"./Position": "./Position.astro"
+	},
+	"files": [
+		"index.js",
+		"Position.astro"
+	],
+	"keywords": [
+		"astro-component",
+		"layout",
+		"unstyled",
+		"headless",
+		"reuseable",
+		"css-based",
+		"mordern-css-based-component"
+	],
+	"homepage": "https://github.com/sacarvy/astro-components/tree/master/position-component",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sacarvy/astro-components.git",
+		"directory": "packages/position-component"
+	},
+	"devDependencies": {
+		"astro": "~1.0.0-beta.73"
+	},
+    "url" : "https://github.com/sacarvy/astro-components/issues/new"
 }
