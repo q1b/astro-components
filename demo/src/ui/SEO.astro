@@ -16,9 +16,9 @@ const type = Astro.props?.type || "website"
 
 const description =
     Astro.props?.description ||
-    "Astro is a new kind of static site builder for the modern web. Powerful developer experience meets lightweight output."
+    "Position Element for Positioning DOM-ELements in your UI, just not need to touch CSS or tailwindcss for positioning, except advance cases."
 
-const title = [Astro.props?.title, "Sukhpreet Singh | Front-end Engineer"]
+const title = [Astro.props?.title, "Position Astro Component | Position Element"]
     .filter(Boolean)
     .join(" | ")
 ---
@@ -73,8 +73,6 @@ const title = [Astro.props?.title, "Sukhpreet Singh | Front-end Engineer"]
 <meta property="article:modified_time" content={new Date().toUTCString()} />
 
 <link rel="canonical" href={canonicalURL} />
-
-<meta name="google-site-verification" content="bwJjTxvLgncfWt0W9tyZIwCg5-aGdsBRudwkFqZV--8" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:url" content={canonicalURL} />
