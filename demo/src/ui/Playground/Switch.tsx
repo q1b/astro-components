@@ -1,6 +1,11 @@
 import { createUniqueId } from "solid-js"
 
-export const Switch = (props: { checked?: boolean; trigger?: () => void }) => {
+export const Switch = (props: {
+	name?: string
+	checked?: boolean
+	trigger?: () => void
+	disabled?: boolean
+}) => {
 	const uid = `toggle-switch-${createUniqueId()}`
 	return (
 		<button
@@ -9,7 +14,7 @@ export const Switch = (props: { checked?: boolean; trigger?: () => void }) => {
 			}}
 			// 74 - 36 = 38
 			// 38 - 4 = 34
-			class="relative inline-flex h-[20px] w-[36px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75"
+			class="relative disabled:opacity-40 inline-flex h-[20px] w-[36px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75"
 			id={uid}
 			role="switch"
 			type="button"
@@ -19,8 +24,10 @@ export const Switch = (props: { checked?: boolean; trigger?: () => void }) => {
 				"bg-slate-500 dark:bg-slate-400": !props?.checked,
 			}}
 			aria-checked={props?.checked ? "true" : "false"}
+			aria-disabled={props?.disabled ? "true" : "false"}
+			disabled={props?.disabled}
 		>
-			{/* <span class="sr-only">Use setting</span> */}
+			<span class="sr-only">toggle {props?.name || "switch"}</span>
 			<span
 				aria-hidden="true"
 				classList={{
@@ -37,6 +44,7 @@ export const SwitchBlock = (props: {
 	name?: string
 	checked?: boolean
 	onChange?: () => void
+	disabled?: boolean
 }) => {
 	return (
 		<div class="flex place-content-between w-full group items-center gap-x-2">
@@ -50,7 +58,12 @@ export const SwitchBlock = (props: {
 			>
 				{props?.name}
 			</span>
-			<Switch trigger={props?.onChange} checked={props.checked} />
+			<Switch
+				name={props?.name}
+				disabled={props?.disabled}
+				trigger={props?.onChange}
+				checked={props.checked}
+			/>
 		</div>
 	)
 }

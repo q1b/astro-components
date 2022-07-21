@@ -147,6 +147,7 @@ export const TabList = (
 								onClick={() => {
 									setActiveRef(ref)
 									props.setActive(ref?.textContent!)
+									console.log(ref?.textContent)
 								}}
 								class="px-2 bg-white/50 dark:bg-slate-600/10 tab-highlight-none hover:bg-slate-500/20 dark:hover:bg-slate-600/20 text-slate-900 dark:text-slate-400 rounded-md shadow-md shadow-white/50 dark:shadow-slate-900/50 transition-colors"
 							>

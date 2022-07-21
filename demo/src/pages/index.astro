@@ -4,10 +4,30 @@ import Layout from "../layouts/default.astro"
 import { ProfileIcon, PenIcon, BoardIcon, NotebookIcon } from "../assets/icons"
 import { SVGCopyButton } from "../ui/Buttons/CopyButton"
 import Card from "../ui/Card.astro"
+import { Goto } from "../ui/Goto"
 import { Playground } from "../ui/Playground"
 
 const docs = await Astro.glob("./docs/*.md")
 // const htmlContent = await notes[0].compiledContent()
+
+const footerLinks = [
+    ["Typescript",{
+        class:'text-[#3178c6] hover:text-[#3982d2] dark:text-[#3982d2] dark:hover:text-[#3178c6]',
+        url:"https://www.typescriptlang.org/"
+    }],
+    ["Tailwind",{
+        class:'text-teal-600 hover:text-teal-400 dark:text-teal-400 dark:hover:text-teal-600',
+        url:"https://tailwindcss.com/"
+    }],
+    ["Solidjs",{
+        class:'text-[#3687E1] hover:text-blue-400 dark:text-[#B1D3F9] dark:hover:text-[#3687E1]',
+        url:"https://www.solidjs.com/"
+    }],
+    ["Astro",{
+        class:'text-orange-600 hover:text-orange-400 dark:text-orange-400 dark:hover:text-orange-600',
+        url:"https://astro.build/"
+    }],
+]
 ---
 
 <Layout title="Sukhpreet Singh | Front-end Engineer" description="Life on Internet">
@@ -23,36 +43,63 @@ const docs = await Astro.glob("./docs/*.md")
 		</div>
 	</main> -->
     <Position col center class="px-4 h-96 global-max-width max-w-4xl w-full gap-4 min-h-[216px] mb-10">
-        <h1 class="select-none text-4xl w-max font-black text-slate-700 dark:text-white">Unstylied Reuseable Components
+        <h1 class="select-none text-xl sm:text-2xl md:text-4xl sm:w-max font-black text-slate-700 dark:text-white">Unstylied Reuseable Components
         </h1>
-        <p class="select-none text-sm w-max text-slate-400 dark:text-white">Based on modern CSS Practises, but explicit
+        <p class="select-none text-xs sm:text-sm sm:w-max text-slate-400 dark:text-white">Based on <span
+                class=" decoration-wavy decoration-slate-400 underline">Flexbox CSS</span> Property, but
+            explicit
             easy to use
         </p>
         <div
-            class="bg-slate-50 dark:bg-slate-700/20 px-2 py-1 inline-flex gap-x-2 items-center font-mono antialiased rounded-lg [&>*]:h-[18px] [&>*]:leading-none ">
-            <span class="text-blue-600 dark:text-white/70 px-0.5"> npm </span>
-            <span class="text-blue-600 dark:text-white/70"> i </span>
-            <span class="text-slate-800 dark:text-white"> position-component </span>
+            class="bg-slate-50 dark:bg-slate-700/20 px-2 py-1 inline-flex gap-x-2 items-center font-mono antialiased rounded-lg sm:[&>*]:h-[18px] [&>*]:leading-none ">
+            <span class="text-sm sm:text-base text-blue-600 dark:text-white/70 px-0.5"> npm </span>
+            <span class="text-sm sm:text-base text-blue-600 dark:text-white/70"> i </span>
+            <span class="text-sm sm:text-base text-slate-800 dark:text-white"> position-component </span>
             <SVGCopyButton value="npm i position-component" timeout={3000} client:load />
         </div>
-        <Position left center apart="closely" class="mt-10 w-full gap-4">
-            <!-- <Position top col left class="w-64 h-28 gap-y-2 bg-slate-1000/40 px-2 py-1.5 rounded-md">
-                <span class="text-slate-400"> Readme ( Docs ) </span>
-                <span class="text-slate-200 text-xs">While using it, or  but looking for how to use it then check it out.</span>
-            </Position> -->
-            <Position col center class="h-28 gap-y-2 px-2 py-1.5 rounded-md">
-                <span class="text-slate-400 peer peer"> Simple GUI to Play Around with Props </span>
-                <!-- <span class="text-slate-200 text-xs">Simple way to test things out, play with it</span> -->
-                <svg viewBox="0 0 24 34"
-                    class="group peer-hover:[&>*]:[d:path('M12,1v18,M19,12l-7,7l-7-7')] w-32 h-auto " fill="none"
-                    shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                    stroke-linejoin="round" stroke-width="1.5">
-                    <!-- width="24" height="24" -->
-                    <path class="[d:path('M12,1v18,M19,12l-7,7l-7-7')]" />
-                    <!-- <path class="[d:path('M12,1v18')] group-hover:[d:path('M12,2v29')] transition-[d]"  />
-      <path class="[d:path('M19,12l-7,7l-7-7')] group-hover:[d:path('M18,23l-6,8l-6-8')] transition-[d]" /> -->
-                </svg>
-            </Position>
+        <div class="flex flex-col sm:flex-row items-center place-content-evenly mt-10 w-full gap-4">
+            <a href="/docs/position">
+                <Position top col left
+                    class="group relative cursor-pointer w-64 gap-y-1 border-2 dark:border-none dark:bg-slate-1000/40 dark:hover:bg-slate-500/20 px-2 py-1.5 rounded-md transition-colors ease-in-out">
+                    <Position right apart class="w-full gap-x-1" >
+                        <span
+                            class="text-slate-500 group-hover:text-slate-400 dark:text-slate-400 dark:group-hover:text-slate-300 text-sm">
+                            Readme ( Docs )
+                        </span>
+                        <span
+                            class="text-slate-600 dark:text-white dark:group-hover:text-indigo-400 group-hover:text-cyan-400">
+                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
+                                width="24">
+                                <path
+                                    class=" [d:path('M7,17,L17+7')] group-hover:[d:path('M6,18,L19+5')] transition-[d]" />
+                                <path class=" [d:path('M7,7h10,v10')] group-hover:[d:path('M12,5h7,v7')] transition-[d]" />
+                            </svg>
+                        </span>
+                    </Position>
+                    <span
+                        class="text-slate-400 group-hover:text-cyan-400 dark:text-slate-200 dark:group-hover:text-white">While
+                        using it, or but
+                        looking for how to use it
+                        then check it
+                        out.</span>
+                </Position>
+            </a>
+            <Goto href="#playground" client:idle >
+                <Position col center class="h-[92px] group relative cursor-pointer gap-y-1 border-2 dark:border-none dark:bg-slate-1000/40 dark:hover:bg-slate-500/20 px-2 py-1.5 rounded-md transition-colors ease-in-out">
+                    <span class="text-slate-400 peer"> Simple GUI to Play Around with Props </span>
+                    <!-- <span class="text-slate-200 text-xs">Simple way to test things out, play with it</span> -->
+                    <svg viewBox="0 0 24 34"
+                        class="group peer-hover:[&>*]:[d:path('M12,1v18,M19,12l-7,7l-7-7')] w-32 h-auto " fill="none"
+                        shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="1.5">
+                        <!-- width="24" height="24" -->
+                        <path class="[d:path('M12,1v18,M19,12l-7,7l-7-7')]" />
+                        <!-- <path class="[d:path('M12,1v18')] group-hover:[d:path('M12,2v29')] transition-[d]"  />
+                            <path class="[d:path('M19,12l-7,7l-7-7')] group-hover:[d:path('M18,23l-6,8l-6-8')] transition-[d]" /> -->
+                    </svg>
+                </Position>
+            </Goto>
         </Position>
     </Position>
     <Position col center class="px-4 h-96 global-max-width max-w-4xl w-full gap-4 min-h-[216px] mb-10">
@@ -70,16 +117,16 @@ const docs = await Astro.glob("./docs/*.md")
         ))}
     </main> -->
     <footer class="pb-10 pt-36 px-4 global-max-width max-w-4xl w-full">
-        <div class="flex gap-x-2">
+        <Position left center class="gap-x-2">
             <a href="/me"
                 class="group text-green-600 hover:text-white dark:text-white dark:hover:text-green-900 animate-move-fast-bg p-1 inline-flex items-center justify-center bg-gradient-to-r from-teal-100/10 hover:from-teal-600 dark:hover:from-teal-100 via-green-400/10 hover:via-green-400 to-teal-100/10 hover:to-teal-600 dark:hover:to-teal-100 bg-[length:400%] rounded-md w-max">
                 <ProfileIcon basic />
             </a>
-            <a href="#notes"
+            <!-- <a href="#notes"
                 class="group text-teal-600 hover:text-white dark:text-white dark:hover:text-teal-900 animate-move-fast-bg p-1 inline-flex items-center justify-center bg-gradient-to-r from-cyan-100/10 hover:from-cyan-600 dark:hover:from-cyan-100 via-cyan-400/10 hover:via-cyan-400 to-cyan-100/10 hover:to-cyan-600 dark:hover:to-cyan-100 bg-[length:400%] rounded-md w-max">
                 <NotebookIcon basic />
-            </a>
-            <a href="#writings"
+            </a> -->
+            <a href="/docs/position"
                 class="group text-slate-600 hover:text-white dark:text-white dark:hover:text-slate-900 animate-move-fast-bg p-1 inline-flex items-center justify-center bg-gradient-to-r from-slate-400/10 hover:from-slate-400 via-white/10 hover:via-slate-600 dark:hover:via-white to-slate-400/10 hover:to-slate-400 bg-[length:400%] rounded-md w-max">
                 <PenIcon basic />
             </a>
@@ -93,6 +140,14 @@ const docs = await Astro.glob("./docs/*.md")
 					Course
 				</h1>
 			</div> -->
-        </div>
+        </Position>
+        <Position center left class=" flex-wrap mt-4 gap-x-1 text-slate-400 dark:text-slate-600">Built with 
+            {footerLinks.reverse().map(([label,props],index) => {
+                const {url,class:cls} = props;
+                let t = ','
+                if(footerLinks.length - 1 === index) t = ''
+                if(footerLinks.length - 2 === index) t = 'and'            
+                return <><a href={url} class={`underline underline-offset-2 hover:decoration-2 ${cls}`}>{label}</a>{t}</>
+            })}</Position>
     </footer>
 </Layout>

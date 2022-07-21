@@ -34,9 +34,9 @@ export const Position = (props: ParentProps<Props>) => {
 					(top() &&
 						!props?.center &&
 						!bottom() &&
-						!props?.right &&
+						!right() &&
 						!left()),
-				"items-start justify-end": top() && props?.right,
+				"items-start justify-end": top() && right(),
 				"items-center justify-start":
 					(props?.center && left()) ||
 					(left() &&

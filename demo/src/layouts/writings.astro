@@ -66,8 +66,7 @@ function formatDate(date: Date) {
                     <dt class="sr-only">Published On</dt>
                     <dd class="font-medium italic pl-1 text-slate-400 dark:text-slate-600">
                         <!-- <time datetime="2021-09-30T19:00">September 30, 2021</time> -->
-                        <time datetime={date.toISOString()}>{formatDate(date)}
-                        </time>
+                        <time datetime={date.toISOString()}>{formatDate(date)}</time>
                     </dd>
                 </dl>
                 <slot></slot>

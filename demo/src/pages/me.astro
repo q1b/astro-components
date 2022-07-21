@@ -1,11 +1,25 @@
 ---
 import Layout from "../layouts/default.astro"
 import { ChatIcon, LinkIcon } from "../assets/icons"
+const githubLink = "https://github.com/sacarvy"
+const twitterLink = "https://twitter.com/XSukhpreet"
 ---
 
 <Layout title="Sukhpreet Singh | Front-end Engineer" description="Life on Internet">   
+    <div class="w-full max-w-5xl" >    
+   <a href="/" class="group w-max px-10 -translate-y-5 flex items-center gap-x-2 text-slate-600 dark:text-slate-400 hover:text-blue-400 dark:hover:text-indigo-400 font-bold dark:font-normal">
+    <svg class="-rotate-[135deg]" fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
+    stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
+    width="24">
+    <path
+        class="[d:path('M7,17,L17+7')] group-hover:[d:path('M6,18,L19+5')] transition-[d]" />
+    <path class=" [d:path('M7,7h10,v10')] group-hover:[d:path('M12,5h7,v7')] transition-[d]" />
+    </svg>
+      back 
+    </a>
+    </div>
    <main class="w-full max-w-5xl flex gap-4 min-h-[216px] ">
-        <section class="flex flex-col items-center justify-center w-full pt-16 pb-28">
+        <section class="flex flex-col items-center justify-center w-full pt-8 pb-28">
             <div class="flex flex-col gap-16 px-10 lg:flex-row">
                 <article id="background-circle"
                     class="relative z-0 flex items-center justify-center flex-shrink-0 w-32 h-32 rounded-full lg:w-64 md:w-52 sm:w-44 lg:h-64 md:h-52 sm:h-44"
@@ -47,14 +61,15 @@ import { ChatIcon, LinkIcon } from "../assets/icons"
                         basketball.
                     </p>
                     <div class="mt-8 flex flex-row gap-x-4">
-                        <a class="
-                                inline-flex tab-highlight-none items-center h-9 px-3 rounded-full 
+                        <a href={twitterLink} target="_blank" rel="external" class="
+                                group inline-flex tab-highlight-none items-center h-9 px-3 rounded-full 
                                 text-sm font-semibold whitespace-nowrap 
-                                
-                                bg-gradient-to-tr
 
-                                from-blue-50 to-blue-100
-                                
+                                border-2 box-border border-blue-400
+                                dark:border-blue-400
+                                bg-transparent     
+
+                                dark:bg-gradient-to-tr                                
                                 dark:from-blue-600 dark:to-blue-800
 
                                 hover:from-blue-100 hover:to-blue-200
@@ -74,9 +89,9 @@ import { ChatIcon, LinkIcon } from "../assets/icons"
 
                                 dark:ring-offset-slate-900
                                 dark:focus:ring-blue-500 
-                            " href="#">
-                            Read full story
-                            <span class="sr-only">, utility-first fundamentals
+                            ">
+                            <svg focusable="false" data-icon="twitter" class="w-4 h-4 -rotate-12 group-hover:rotate-12 transition-transform ease-elastic-3 duration-300" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+                            <span class="sr-only"> Link to Twitter
                             </span>
                             <svg class="overflow-visible ml-3 text-blue-300 group-hover:text-blue-400 dark:text-blue-500 dark:group-hover:text-blue-400"
                                 width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor"
@@ -84,32 +99,43 @@ import { ChatIcon, LinkIcon } from "../assets/icons"
                                 <path d="M0 0L3 3L0 6"></path>
                             </svg>
                         </a>
-                        <a class="group relative inline-flex tab-highlight-none items-center gap-x-2 h-9 px-3 rounded-full 
-                                text-sm font-semibold whitespace-nowrap                                
-                                bg-slate-100
-                                hover:bg-slate-200
-                                
-                                text-slate-600 
-                                hover:text-slate-700 
-                                
-                                dark:bg-slate-700
-                                dark:hover:bg-slate-600 
-                                
-                                dark:text-white/90 
-                                dark:hover:text-white
+                            <a href={githubLink} target="_blank" rel="external" class="
+                                    group relative inline-flex tab-highlight-none items-center h-9 px-3 rounded-full 
+                                    text-sm font-semibold whitespace-nowrap                                
+                                    
+                                    border-2 box-border border-slate-400
+                                    dark:border-slate-400
+                                    bg-transparent     
 
-                                focus:outline-none 
-                                focus:ring-2
-                                ring-offset-2
-                                focus:ring-slate-500                                 
-                                dark:ring-offset-slate-900
-                                dark:focus:ring-slate-500 
-                            " href="#">
-                            Get in touch
-                            <span class="sr-only">, utility-first fundamentals
-                            </span>
-                            <ChatIcon basic />
-                        </a>
+                                    hover:bg-slate-100
+                                    
+                                    text-slate-600 
+                                    hover:text-slate-700 
+                                    
+                                    dark:bg-slate-700
+                                    dark:hover:bg-slate-600 
+                                    
+                                    dark:text-white/90 
+                                    dark:hover:text-white
+
+                                    focus:outline-none 
+                                    focus:ring-2
+                                    ring-offset-2
+                                    focus:ring-slate-500                                 
+                                    dark:ring-offset-slate-900
+                                    dark:focus:ring-slate-500 
+                                ">
+                                <svg viewBox="0 0 28 28" fill="#0F172A" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 -rotate-12 group-hover:[--tw-rotate:368deg] transition-transform ease-squish-4  group-hover:duration-300 duration-1000 fill-slate-1000 dark:fill-slate-200">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M14 0C6.265 0 0 6.265 0 14c0 6.195 4.008 11.427 9.572 13.282.7.123.963-.297.963-.665 0-.332-.018-1.434-.018-2.607-3.517.647-4.427-.858-4.707-1.645-.157-.402-.84-1.645-1.435-1.977-.49-.263-1.19-.91-.018-.928 1.103-.018 1.89 1.015 2.153 1.435 1.26 2.117 3.273 1.523 4.078 1.155.122-.91.49-1.523.892-1.873-3.115-.35-6.37-1.557-6.37-6.912 0-1.523.542-2.783 1.435-3.763-.14-.35-.63-1.785.14-3.71 0 0 1.173-.367 3.85 1.436a12.99 12.99 0 013.5-.473c1.19 0 2.38.157 3.5.473 2.677-1.82 3.85-1.435 3.85-1.435.77 1.925.28 3.36.14 3.71.893.98 1.435 2.222 1.435 3.762 0 5.372-3.273 6.563-6.387 6.912.507.438.944 1.278.944 2.59 0 1.873-.017 3.378-.017 3.85 0 .368.262.805.962.665A14.022 14.022 0 0028 14c0-7.735-6.265-14-14-14z"></path>
+                                </svg>
+                                <span class="sr-only">, utility-first fundamentals
+                                </span>
+                                <svg class="overflow-visible ml-3 text-slate-400 group-hover:text-blue-400 dark:text-slate-500 dark:group-hover:text-blue-400"
+                                width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M0 0L3 3L0 6"></path>
+                            </svg>
+                            </a>
                     </div>
                 </article>
             </div>

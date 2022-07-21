@@ -184,7 +184,7 @@ export const Navbar = () => {
 			>
 				<a class="pl-4 " href="/">
 					<Logo
-						circle="dark:stroke-white stroke-lime-900"
+						circle="dark:stroke-white stroke-cyan-900"
 						body={{
 							dark: "fill-blue-50 stroke-blue-600",
 							light: "fill-white stroke-blue-500",
