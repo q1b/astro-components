@@ -1,6 +1,6 @@
 # UnStylied Reuseable Components
 
--   Position - landed check it out here http://localhost:3000/#playground
+-   Position - landed check it out here https://unstylied-components.vercel.app/#playground
 
 Basically, based on the Flexbox CSS Properties just more, explict to use
 
@@ -51,6 +51,6 @@ All commands are run from the root of the project, from a terminal:
 
 ## 👀 Want to learn more?
 
-Feel free to check [documentation](https:// /docs/position)
+Feel free to check [documentation](https://unstylied-components.vercel.app/docs/position)
 
 jump into our [Discord server](https://astro.build/chat), tag alphacat their, I will be waiting for your reply

@@ -52,7 +52,7 @@ const TwitterLink = () => {
 const GithubLink = () => {
 	return (
 		<a
-			href="#"
+			href="https://github.com/sacarvy/astro-components"
 			class="
                     p-2 
                     rounded-md 

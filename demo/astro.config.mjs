@@ -178,7 +178,7 @@ function githubRemarkPlugin() {
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://peadevp.com/",
+	site: "https://unstylied-components.vercel.app/",
 	integrations: [solid(), sitemap()],
 	vite: {
 		ssr: {
