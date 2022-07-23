@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/writings.astro"
-title: Basic Sorting Algorithms
-description: Implementation of 6 different algorithms, to sort a numeric array in javascript, and comparision between their Space and Time Complexity.
+title: Documentation for Position-Component npm
+description: Dpeth in view of position-component
 publishedOn: "2022-07-19"
 setup: |
     import { Position } from "position-component"
