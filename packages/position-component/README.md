@@ -21,7 +21,8 @@ Just simple to use Component to make it easy to position HTML Elements, using cs
 
 ## Why I made it ?
 
-Made this Simple Component for My Personal Project, It's was **looking useful** So, I Thought 🤔 to share it as a npm package
+-   Made this Simple Component for My Personal Project, It's was **looking useful** So, I Thought 🤔 to share it as a npm package,
+-   Another main reason was, using flexbox is really powerful and there are hidden power, init that can be utilised to create great UI,
 
 # How to use it ?
 
@@ -56,16 +57,18 @@ import { Position } from 'position-component'
 </Position>
 ```
 
-| Props    | Valid Values                                            | Status                  |
-| -------- | ------------------------------------------------------- | ----------------------- |
-| class    | string                                                  | -                       |
-| col      | `true` \| `false`                                       | -                       |
-| reverse  | `true` \| `false`                                       | -                       |
-| top      | `true` \| `false`                                       | -                       |
-| center   | `true` \| `false`                                       | -                       |
-| bottom   | `true` \| `false`                                       | -                       |
-| left     | `true` \| `false`                                       | -                       |
-| right    | `true` \| `false`                                       | -                       |
-| stretchX | `true` \| `false`                                       | Currently Experiemental |
-| stretchY | `true` \| `false`                                       | Currently Experiemental |
-| apart    | `true` \| `false` <br/> \| 'loosely' <br/> \| 'closely' | -                       |
+| Props    | Valid Values                                            |
+| -------- | ------------------------------------------------------- |
+| class    | string                                                  |
+| col      | `true` \| `false`                                       |
+| reverse  | `true` \| `false`                                       |
+| top      | `true` \| `false`                                       |
+| center   | `true` \| `false`                                       |
+| bottom   | `true` \| `false`                                       |
+| left     | `true` \| `false`                                       |
+| right    | `true` \| `false`                                       |
+| stretchX | `true` \| `false`                                       |
+| stretchY | `true` \| `false`                                       |
+| apart    | `true` \| `false` <br/> \| 'loosely' <br/> \| 'closely' |
+
+play around props here, [https://unstylied-components.vercel.app/](https://unstylied-components.vercel.app/)

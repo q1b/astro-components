@@ -35,19 +35,19 @@ This project uses **workspaces** to develop a single package, `@example/my-compo
 
 All commands are run from the root of the project, from a terminal:
 
-| Props    | Valid Values                      | Status                  |
-| -------- | --------------------------------- | ----------------------- |
-| class    | string                            | -                       |
-| col      | boolean                           | -                       |
-| reverse  | boolean                           | -                       |
-| top      | boolean                           | -                       |
-| center   | boolean                           | -                       |
-| bottom   | boolean                           | -                       |
-| left     | boolean                           | -                       |
-| right    | boolean                           | -                       |
-| stretchX | boolean                           | Currently Experiemental |
-| stretchY | boolean                           | Currently Experiemental |
-| apart    | boolean \| 'loosely' \| 'closely' | -                       |
+| Props    | Valid Values                      |
+| -------- | --------------------------------- |
+| class    | string                            |
+| col      | boolean                           |
+| reverse  | boolean                           |
+| top      | boolean                           |
+| center   | boolean                           |
+| bottom   | boolean                           |
+| left     | boolean                           |
+| right    | boolean                           |
+| stretchX | boolean                           |
+| stretchY | boolean                           |
+| apart    | boolean \| 'loosely' \| 'closely' |
 
 ## 👀 Want to learn more?
 
