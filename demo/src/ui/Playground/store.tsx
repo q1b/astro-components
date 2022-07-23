@@ -2,8 +2,8 @@ import { createStore } from "solid-js/store"
 
 export const apart = ["undefined", "true", "closely", "loosely"] as const
 
-export const [controlsStore, setControlsStore] = createStore<{
-	apart: typeof apart[number]
+export type PositionProps = {
+	apart?: typeof apart[number]
 	class?: string
 	col?: boolean
 	reverse?: boolean
@@ -12,9 +12,12 @@ export const [controlsStore, setControlsStore] = createStore<{
 	left?: boolean
 	bottom?: boolean
 	right?: boolean
+	stretch?: boolean
 	stretchX?: boolean
 	stretchY?: boolean
-}>({
+}
+
+export const [controlsStore, setControlsStore] = createStore<PositionProps>({
 	apart: "undefined",
 	reverse: false,
 	col: false,
@@ -23,6 +26,7 @@ export const [controlsStore, setControlsStore] = createStore<{
 	left: true,
 	bottom: false,
 	right: false,
+	stretch: false,
 	stretchX: false,
 	stretchY: false,
 	class: "",
@@ -38,5 +42,6 @@ export const toggleTop = () => setControlsStore("top", (v) => !v)
 export const toggleLeft = () => setControlsStore("left", (v) => !v)
 export const toggleBottom = () => setControlsStore("bottom", (v) => !v)
 export const toggleRight = () => setControlsStore("right", (v) => !v)
+export const toggleStretch = () => setControlsStore("stretch", (v) => !v)
 export const toggleStretchX = () => setControlsStore("stretchX", (v) => !v)
 export const toggleStretchY = () => setControlsStore("stretchY", (v) => !v)

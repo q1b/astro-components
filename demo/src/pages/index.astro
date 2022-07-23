@@ -11,21 +11,21 @@ const docs = await Astro.glob("./docs/*.md")
 // const htmlContent = await notes[0].compiledContent()
 
 const footerLinks = [
-    ["Typescript",{
-        class:'text-[#3178c6] hover:text-[#3982d2] dark:text-[#3982d2] dark:hover:text-[#3178c6]',
-        url:"https://www.typescriptlang.org/"
+    ["Typescript", {
+        class: 'text-[#3178c6] hover:text-[#3982d2] dark:text-[#3982d2] dark:hover:text-[#3178c6]',
+        url: "https://www.typescriptlang.org/"
     }],
-    ["Tailwind",{
-        class:'text-teal-600 hover:text-teal-400 dark:text-teal-400 dark:hover:text-teal-600',
-        url:"https://tailwindcss.com/"
+    ["Tailwind", {
+        class: 'text-teal-600 hover:text-teal-400 dark:text-teal-400 dark:hover:text-teal-600',
+        url: "https://tailwindcss.com/"
     }],
-    ["Solidjs",{
-        class:'text-[#3687E1] hover:text-blue-400 dark:text-[#B1D3F9] dark:hover:text-[#3687E1]',
-        url:"https://www.solidjs.com/"
+    ["Solidjs", {
+        class: 'text-[#3687E1] hover:text-blue-400 dark:text-[#B1D3F9] dark:hover:text-[#3687E1]',
+        url: "https://www.solidjs.com/"
     }],
-    ["Astro",{
-        class:'text-orange-600 hover:text-orange-400 dark:text-orange-400 dark:hover:text-orange-600',
-        url:"https://astro.build/"
+    ["Astro", {
+        class: 'text-orange-600 hover:text-orange-400 dark:text-orange-400 dark:hover:text-orange-600',
+        url: "https://astro.build/"
     }],
 ]
 ---
@@ -43,7 +43,8 @@ const footerLinks = [
 		</div>
 	</main> -->
     <Position col center class="px-4 h-96 global-max-width max-w-4xl w-full gap-4 min-h-[216px] mb-10">
-        <h1 class="select-none text-xl sm:text-2xl md:text-4xl sm:w-max font-black text-slate-700 dark:text-white">Unstylied Reuseable Components
+        <h1 class="select-none text-xl sm:text-2xl md:text-4xl sm:w-max font-black text-slate-700 dark:text-white">
+            Unstylied Reuseable Components
         </h1>
         <p class="select-none text-xs sm:text-sm sm:w-max text-slate-400 dark:text-white">Based on <span
                 class=" decoration-wavy decoration-slate-400 underline">Flexbox CSS</span> Property, but
@@ -61,7 +62,7 @@ const footerLinks = [
             <a href="/docs/position">
                 <Position top col left
                     class="group relative cursor-pointer w-64 gap-y-1 border-2 dark:border-none dark:bg-slate-1000/40 dark:hover:bg-slate-500/20 px-2 py-1.5 rounded-md transition-colors ease-in-out">
-                    <Position right apart class="w-full gap-x-1" >
+                    <Position right apart class="w-full gap-x-1">
                         <span
                             class="text-slate-500 group-hover:text-slate-400 dark:text-slate-400 dark:group-hover:text-slate-300 text-sm">
                             Readme ( Docs )
@@ -73,7 +74,8 @@ const footerLinks = [
                                 width="24">
                                 <path
                                     class=" [d:path('M7,17,L17+7')] group-hover:[d:path('M6,18,L19+5')] transition-[d]" />
-                                <path class=" [d:path('M7,7h10,v10')] group-hover:[d:path('M12,5h7,v7')] transition-[d]" />
+                                <path
+                                    class=" [d:path('M7,7h10,v10')] group-hover:[d:path('M12,5h7,v7')] transition-[d]" />
                             </svg>
                         </span>
                     </Position>
@@ -85,8 +87,9 @@ const footerLinks = [
                         out.</span>
                 </Position>
             </a>
-            <Goto href="#playground" client:idle >
-                <Position col center class="h-[92px] group relative cursor-pointer gap-y-1 border-2 dark:border-none dark:bg-slate-1000/40 dark:hover:bg-slate-500/20 px-2 py-1.5 rounded-md transition-colors ease-in-out">
+            <Goto href="#playground" client:idle>
+                <Position col center
+                    class="h-[92px] group relative cursor-pointer gap-y-1 border-2 dark:border-none dark:bg-slate-1000/40 dark:hover:bg-slate-500/20 px-2 py-1.5 rounded-md transition-colors ease-in-out">
                     <span class="text-slate-400 peer"> Simple GUI to Play Around with Props </span>
                     <!-- <span class="text-slate-200 text-xs">Simple way to test things out, play with it</span> -->
                     <svg viewBox="0 0 24 34"
@@ -100,7 +103,7 @@ const footerLinks = [
                     </svg>
                 </Position>
             </Goto>
-        </Position>
+    </Position>
     </Position>
     <Position col center class="px-4 h-96 global-max-width max-w-4xl w-full gap-4 min-h-[216px] mb-10">
         <Playground client:idle />
@@ -141,13 +144,13 @@ const footerLinks = [
 				</h1>
 			</div> -->
         </Position>
-        <Position center left class=" flex-wrap mt-4 gap-x-1 text-slate-400 dark:text-slate-600">Built with 
+        <Position center left class=" flex-wrap mt-4 gap-x-1 text-slate-400 dark:text-slate-600">Built with
             {footerLinks.reverse().map(([label,props],index) => {
-                const {url,class:cls} = props;
-                let t = ','
-                if(footerLinks.length - 1 === index) t = ''
-                if(footerLinks.length - 2 === index) t = 'and'            
-                return <><a href={url} class={`underline underline-offset-2 hover:decoration-2 ${cls}`}>{label}</a>{t}</>
+            const {url,class:cls} = props;
+            let t = ','
+            if(footerLinks.length - 1 === index) t = ''
+            if(footerLinks.length - 2 === index) t = 'and'
+            return <><a href={url} class={`underline underline-offset-2 hover:decoration-2 ${cls}`}>{label}</a>{t}</>
             })}</Position>
     </footer>
 </Layout>

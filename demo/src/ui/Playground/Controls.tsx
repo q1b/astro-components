@@ -10,6 +10,7 @@ import {
 	toggleLeft,
 	toggleReverse,
 	toggleRight,
+	toggleStretch,
 	toggleStretchX,
 	toggleStretchY,
 	toggleTop,
@@ -21,76 +22,102 @@ import { createMemo, createSignal, For, onMount } from "solid-js"
 
 // top is true then, bottom is disabled vice-versa
 
-const setGroup = [
-	["col", [() => false, toggleCol]],
-	[
-		"top",
-		[
-			createMemo(
-				() =>
-					controlsStore.bottom ||
-					(controlsStore.center &&
-						(controlsStore.left || controlsStore.right))
-			),
-			toggleTop,
-		],
-	],
-	[
-		"left",
-		[
-			createMemo(
-				() =>
-					controlsStore.right ||
-					(controlsStore.center &&
-						(controlsStore.top || controlsStore.bottom))
-			),
-			toggleLeft,
-		],
-	],
-	[
-		"right",
-		[
-			createMemo(
-				() =>
-					controlsStore.left ||
-					(controlsStore.center &&
-						(controlsStore.top || controlsStore.bottom))
-			),
-			toggleRight,
-		],
-	],
-	[
-		"bottom",
-		[
-			createMemo(
-				() =>
-					controlsStore.top ||
-					(controlsStore.center &&
-						(controlsStore.left || controlsStore.right))
-			),
-			toggleBottom,
-		],
-	],
-	[
-		"center",
-		[
-			createMemo(
-				() =>
-					(controlsStore.top &&
-						(controlsStore.left || controlsStore.right)) ||
-					(controlsStore.bottom &&
-						(controlsStore.left || controlsStore.right))
-			),
-			toggleCenter,
-		],
-	],
-	["stretchX", [() => false, toggleStretchX]],
-	["stretchY", [() => false, toggleStretchY]],
-	["reverse", [() => false, toggleReverse]],
-]
-
 export const Controls = () => {
 	const [isMounted, setIsMounted] = createSignal(false)
+	const setGroup = [
+		["col", [() => false, toggleCol]],
+		[
+			"top",
+			[
+				createMemo(
+					() =>
+						controlsStore.bottom ||
+						(controlsStore.center &&
+							(controlsStore.left || controlsStore.right))
+				),
+				toggleTop,
+			],
+		],
+		[
+			"left",
+			[
+				createMemo(
+					() =>
+						controlsStore.right ||
+						(controlsStore.center &&
+							(controlsStore.top || controlsStore.bottom))
+				),
+				toggleLeft,
+			],
+		],
+		[
+			"right",
+			[
+				createMemo(
+					() =>
+						controlsStore.left ||
+						(controlsStore.center &&
+							(controlsStore.top || controlsStore.bottom))
+				),
+				toggleRight,
+			],
+		],
+		[
+			"bottom",
+			[
+				createMemo(
+					() =>
+						controlsStore.top ||
+						(controlsStore.center &&
+							(controlsStore.left || controlsStore.right))
+				),
+				toggleBottom,
+			],
+		],
+		[
+			"center",
+			[
+				createMemo(
+					() =>
+						(controlsStore.top &&
+							(controlsStore.left || controlsStore.right)) ||
+						(controlsStore.bottom &&
+							(controlsStore.left || controlsStore.right))
+				),
+				toggleCenter,
+			],
+		],
+		[
+			"stretch",
+			[
+				createMemo(
+					() => controlsStore.stretchX && controlsStore.stretchY
+				),
+				toggleStretch,
+			],
+		],
+		[
+			"stretchX",
+			[
+				createMemo(
+					() => controlsStore.stretch
+					// && !controlsStore.stretchY
+				),
+				toggleStretchX,
+			],
+		],
+		[
+			"stretchY",
+			[
+				createMemo(
+					() => controlsStore.stretch
+					// && !controlsStore.stretchY
+				),
+				toggleStretchY,
+			],
+		],
+		["reverse", [() => false, toggleReverse]],
+	]
 	onMount(() => {
 		setIsMounted(true)
 	})

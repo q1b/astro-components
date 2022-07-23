@@ -1,30 +1,108 @@
 ---
 export interface Props {
-    class?: string
-    col?: boolean
-    reverse?: boolean
-    center?: boolean
-    top?: boolean
-    left?: boolean
-    bottom?: boolean
-    right?: boolean
-    stretchX?: boolean
-    stretchY?: boolean
-    apart?: boolean | 'loosely' | 'closely'
+  class?: string;
+  col?: boolean;
+  reverse?: boolean;
+  center?: boolean;
+  top?: boolean;
+  left?: boolean;
+  bottom?: boolean;
+  right?: boolean;
+  stretch?: boolean;
+  stretchX?: boolean;
+  stretchY?: boolean;
+  apart?: boolean | "loosely" | "closely";
 }
 
-let { center, col, apart, reverse, top, left, bottom, right, class: classStr, stretchX, stretchY } = Astro.props as Props
+let {
+  center,
+  col,
+  apart,
+  reverse,
+  top,
+  left,
+  bottom,
+  right,
+  class: classStr,
+  stretch,
+  stretchX,
+  stretchY,
+} = Astro.props as Props;
 
-let temp;
 if (col) {
-    temp = top;
-    top = left;
-    left = temp;
-
-    temp = bottom;
-    bottom = right;
-    right = temp;
+  [top, left] = [left, top];
+  [bottom, right] = [right, bottom];
+  [stretchX, stretchY] = [stretchY, stretchX];
 }
+
+// code for direction
+let dir='';
+
+if (col && reverse) dir = "flex-col-reverse";
+else if (!col && reverse) dir = "flex-row-reverse";
+else if (col) dir = "flex-col";
+
+let firstCls = "items-start";
+let secondCls = "justify-start";
+
+if (top && left) {
+  firstCls = "items-start";
+  secondCls = "justify-start";
+} else if (top && right) {
+  firstCls = "items-start";
+  secondCls = "justify-end";
+} else if (bottom && left) {
+  firstCls = "items-end";
+  secondCls = "justify-start";
+} else if (bottom && right) {
+  firstCls = "items-end";
+  secondCls = "justify-end";
+} else if (top) {
+  firstCls = "items-start";
+  secondCls = "justify-center";
+} else if (left) {
+  firstCls = "items-center";
+  secondCls = "justify-start";
+} else if (right) {
+  firstCls = "items-center";
+  secondCls = "justify-end";
+} else if (bottom) {
+  firstCls = "items-end";
+  secondCls = "justify-center";
+} else if (center && !top && !left && !right && !bottom) {
+  firstCls = "items-center";
+  secondCls = "justify-center";
+} else {
+  firstCls = "items-start";
+  secondCls = "justify-center";
+}
+
+if (stretch || (stretchX && stretchY)) {
+  firstCls = "items-stretch";
+  secondCls = "[&>*]:grow";
+  // return `${firstCls} ${secondCls}`
+} else if (stretchX) {
+  secondCls = "[&>*]:grow";
+  if (apart) {
+    if (apart === "closely") secondCls = "justify-evenly";
+    else if (apart === "loosely") secondCls = "justify-around";
+    else secondCls = "justify-between";
+  }
+} else if (stretchY) {
+  firstCls = "items-stretch";
+  if (apart) {
+    if (apart === "closely") secondCls = "justify-evenly";
+    else if (apart === "loosely") secondCls = "justify-around";
+    else secondCls = "justify-between";
+  }
+} else {
+  if (apart) {
+    if (apart === "closely") secondCls = "justify-evenly";
+    else if (apart === "loosely") secondCls = "justify-around";
+    else secondCls = "justify-between";
+  }
+}
+
 ---
 
 <style is:global>
@@ -64,12 +142,12 @@ if (col) {
         justify-content: flex-start;
     }
 
-    .justify-end {
-        justify-content: flex-end;
-    }
-
     .justify-center {
         justify-content: center;
+    }
+
+    .justify-end {
+        justify-content: flex-end;
     }
 
     .justify-between {
@@ -94,17 +172,7 @@ if (col) {
         flex-grow: 1;
     }
 </style>
-<div class:list={['flex',{ 'flex-col' :col && !reverse, 'flex-col-reverse' :col && reverse, 'flex-row-reverse' :!col &&
-    reverse, 'items-start justify-start' : top && left, 'items-start justify-center' : top &&
-    center, 'items-start justify-end' : top && right, 'items-center justify-start' : center &&
-    left, 'items-center justify-end' : center && right, 'items-end justify-start' : bottom &&
-    left, 'items-end justify-center' : bottom && center, 'items-end justify-end' : bottom &&
-    right, 'items-center justify-center' : center && !top && !bottom && !right && !left, 'items-stretch' : col &&
-    stretchX, '[&>*]:grow' : !col && stretchX, '[&>*]:grow ' : col && stretchY, 'justify-stretch' : !col &&
-    stretchY, 'justify-between' : apart && apart !=='closely' && apart !=='loosely' , 'justify-around'
-    :apart==='loosely' , 'justify-evenly' : apart==='closely' , },{ 'items-start justify-center' : top && !center &&
-    !bottom && !right && !left, 'items-end justify-center' : bottom && !top && !center && !right &&
-    !left, 'items-center justify-start' : left && !top && !bottom && !right && !center, 'items-center justify-end' :
-    right && !top && !bottom && !center && !left, },classStr]}>
+
+<div class={`flex ${dir} ${firstCls} ${secondCls} ${classStr}`}>
     <slot />
 </div>

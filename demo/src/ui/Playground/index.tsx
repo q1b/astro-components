@@ -22,6 +22,7 @@ export const Playground = () => {
 					left={controlsStore.left}
 					bottom={controlsStore.bottom}
 					right={controlsStore.right}
+					stretch={controlsStore.stretch}
 					stretchX={controlsStore.stretchX}
 					stretchY={controlsStore.stretchY}
 					class="bg-white/80 dark:bg-slate-1000/50 w-full h-full mr-1 rounded-md"
