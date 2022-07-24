@@ -1,178 +1,188 @@
 ---
-export interface Props {
-  class?: string;
-  col?: boolean;
-  reverse?: boolean;
-  center?: boolean;
-  top?: boolean;
-  left?: boolean;
-  bottom?: boolean;
-  right?: boolean;
-  stretch?: boolean;
-  stretchX?: boolean;
-  stretchY?: boolean;
-  apart?: boolean | "loosely" | "closely";
+import './index.css'
+
+export interface Props extends PropsType {
 }
+
+type SimpleProps = {
+    as?: keyof HTMLElementTagNameMap;
+    class?: string;
+    col?: boolean;
+    reverse?: boolean;
+    center?: boolean;
+    top?: boolean;
+    left?: boolean;
+    bottom?: boolean;
+    right?: boolean;
+    stretch?: boolean;
+    stretchX?: boolean;
+    stretchY?: boolean;
+    apart?: boolean | "loosely" | "closely";
+}
+
+const mediaPoints = ['sm', 'md', 'lg', 'xl', '2xl'] as const;
+
+type MediaProps = `${(typeof mediaPoints)[number]}:${keyof Omit<Omit<SimpleProps, 'class'>, 'as'>}`
+
+type PropsType = SimpleProps & {
+    [Key in MediaProps]?: [Key extends "sm:apart" | "md:apart" | "lg:apart" | "xl:apart" | "2xl:apart" ? SimpleProps['apart'] : boolean][number]
+}
+
+const mediaMap = new Map()
 
 let {
-  center,
-  col,
-  apart,
-  reverse,
-  top,
-  left,
-  bottom,
-  right,
-  class: classStr,
-  stretch,
-  stretchX,
-  stretchY,
+    as: Element = 'div',
+    center,
+    col,
+    apart,
+    reverse,
+    top,
+    left,
+    bottom,
+    right,
+    class: classStr,
+    stretch,
+    stretchX,
+    stretchY,
+    ...otherProps
 } = Astro.props as Props;
 
-if (col) {
-  [top, left] = [left, top];
-  [bottom, right] = [right, bottom];
-  [stretchX, stretchY] = [stretchY, stretchX];
-}
+Object.keys(otherProps).forEach(key => {
+    if (key.startsWith('sm:') || key.startsWith('md:') || key.startsWith('lg:') || key.startsWith('xl:') || key.startsWith('2xl:')) {
+        const [media, prop] = key.split(':');
+        mediaMap.set(media, {
+            [prop]: otherProps[key]
+        })
+    }
+});
 
-// code for direction
-let dir='';
+const generatorCls = (prefix = '', genprops: { col?: boolean, reverse?: boolean, top?: boolean, left?: boolean, right?: boolean, bottom?: boolean, center?: boolean; stretch?: boolean, stretchX?: boolean, stretchY?: boolean, apart?: boolean | 'closely' | 'loosely' }) => {
+    let {
+        center,
+        col,
+        apart,
+        reverse,
+        top,
+        left,
+        bottom,
+        right,
+        stretch,
+        stretchX,
+        stretchY,
+    } = genprops;
 
-if (col && reverse) dir = "flex-col-reverse";
-else if (!col && reverse) dir = "flex-row-reverse";
-else if (col) dir = "flex-col";
-
-let firstCls = "items-start";
-let secondCls = "justify-start";
-
-if (top && left) {
-  firstCls = "items-start";
-  secondCls = "justify-start";
-} else if (top && right) {
-  firstCls = "items-start";
-  secondCls = "justify-end";
-} else if (bottom && left) {
-  firstCls = "items-end";
-  secondCls = "justify-start";
-} else if (bottom && right) {
-  firstCls = "items-end";
-  secondCls = "justify-end";
-} else if (top) {
-  firstCls = "items-start";
-  secondCls = "justify-center";
-} else if (left) {
-  firstCls = "items-center";
-  secondCls = "justify-start";
-} else if (right) {
-  firstCls = "items-center";
-  secondCls = "justify-end";
-} else if (bottom) {
-  firstCls = "items-end";
-  secondCls = "justify-center";
-} else if (center && !top && !left && !right && !bottom) {
-  firstCls = "items-center";
-  secondCls = "justify-center";
-} else {
-  firstCls = "items-start";
-  secondCls = "justify-center";
-}
-
-if (stretch || (stretchX && stretchY)) {
-  firstCls = "items-stretch";
-  secondCls = "[&>*]:grow";
-  // return `${firstCls} ${secondCls}`
-} else if (stretchX) {
-  secondCls = "[&>*]:grow";
-  if (apart) {
-    if (apart === "closely") secondCls = "justify-evenly";
-    else if (apart === "loosely") secondCls = "justify-around";
-    else secondCls = "justify-between";
-  }
-} else if (stretchY) {
-  firstCls = "items-stretch";
-  if (apart) {
-    if (apart === "closely") secondCls = "justify-evenly";
-    else if (apart === "loosely") secondCls = "justify-around";
-    else secondCls = "justify-between";
-  }
-} else {
-  if (apart) {
-    if (apart === "closely") secondCls = "justify-evenly";
-    else if (apart === "loosely") secondCls = "justify-around";
-    else secondCls = "justify-between";
-  }
-}
-
----
-
-<style is:global>
-    .flex {
-        display: flex;
+    if (col) {
+        [top, left] = [left, top];
+        [bottom, right] = [right, bottom];
+        [stretchX, stretchY] = [stretchY, stretchX];
     }
 
-    .flex-col {
-        flex-direction: column;
+    // code for direction
+    let dir = 'flex-row';
+
+    if (col && reverse) dir = "flex-col-reverse";
+    else if (!col && reverse) dir = "flex-row-reverse";
+    else if (col) dir = "flex-col";
+
+    let firstCls;
+    let secondCls;
+
+    if (prefix === '') {
+        firstCls = "items-start";
+        secondCls = "justify-start";
     }
 
-    .flex-row-reverse {
-        flex-direction: row-reverse;
+    if (top && left) {
+        firstCls = "items-start";
+        secondCls = "justify-start";
+    } else if (top && right) {
+        firstCls = "items-start";
+        secondCls = "justify-end";
+    } else if (bottom && left) {
+        firstCls = "items-end";
+        secondCls = "justify-start";
+    } else if (bottom && right) {
+        firstCls = "items-end";
+        secondCls = "justify-end";
+    } else if (top) {
+        firstCls = "items-start";
+        secondCls = "justify-center";
+    } else if (left) {
+        firstCls = "items-center";
+        secondCls = "justify-start";
+    } else if (right) {
+        firstCls = "items-center";
+        secondCls = "justify-end";
+    } else if (bottom) {
+        firstCls = "items-end";
+        secondCls = "justify-center";
+    } else if (center && !top && !left && !right && !bottom) {
+        firstCls = "items-center";
+        secondCls = "justify-center";
     }
 
-    .flex-col-reverse {
-        flex-direction: column-reverse;
-    }
-
-    .items-start {
-        align-items: flex-start;
-    }
-
-    .items-end {
-        align-items: flex-end;
-    }
-
-    .items-center {
-        align-items: center;
-    }
-
-    .items-stretch {
-        align-items: stretch;
-    }
-
-    .justify-start {
-        justify-content: flex-start;
-    }
-
-    .justify-center {
-        justify-content: center;
-    }
-
-    .justify-end {
-        justify-content: flex-end;
-    }
-
-    .justify-between {
-        justify-content: space-between;
-    }
-
-    .justify-around {
-        justify-content: space-around;
-    }
-
-    .justify-evenly {
-        justify-content: space-evenly;
-    }
-
-    @media (min-width: 640px) {
-        .sm\:items-start {
-            align-items: flex-start;
+    if (stretch || (stretchX && stretchY)) {
+        firstCls = "items-stretch";
+        secondCls = "[&>*]:grow";
+        // return `${firstCls} ${secondCls}`
+    } else if (stretchX) {
+        secondCls = "[&>*]:grow";
+        if (apart) {
+            if (apart === "closely") secondCls = "justify-evenly";
+            else if (apart === "loosely") secondCls = "justify-around";
+            else secondCls = "justify-between";
+        }
+    } else if (stretchY) {
+        firstCls = "items-stretch";
+        if (apart) {
+            if (apart === "closely") secondCls = "justify-evenly";
+            else if (apart === "loosely") secondCls = "justify-around";
+            else secondCls = "justify-between";
+        }
+    } else {
+        if (apart) {
+            if (apart === "closely") secondCls = "justify-evenly";
+            else if (apart === "loosely") secondCls = "justify-around";
+            else secondCls = "justify-between";
         }
     }
-
-    .\[\&\>\*\]\:grow>* {
-        flex-grow: 1;
+    if (prefix === '') {
+        return [dir, firstCls, secondCls]
+    } else if (firstCls !== undefined && secondCls !== undefined) {
+        return [prefix + dir, prefix + firstCls, prefix + secondCls]
+    } else if (firstCls !== undefined && secondCls === undefined) {
+        return [prefix + dir, prefix + firstCls]
+    } else if (firstCls === undefined && secondCls !== undefined) {
+        return [prefix + dir, prefix + secondCls]
+    } else {
+        return [prefix + dir]
     }
-</style>
+}
 
-<div class={`flex ${dir} ${firstCls} ${secondCls} ${classStr}`}>
+const [dir, firstCls, secondCls] = generatorCls('', {
+    center,
+    col,
+    apart,
+    reverse,
+    top,
+    left,
+    bottom,
+    right,
+    stretch,
+    stretchX,
+    stretchY,
+})
+
+const mediaArr = Array.from(mediaMap)
+let mediaClassList = [];
+for (let index = 0; index < mediaArr.length; index++) {
+    const [media, props] = mediaArr[index];
+    generatorCls(media + ':', props).forEach(cls => {
+        mediaClassList.push(cls)
+    })
+}
+---
+
+<Element class={`flex ${dir} ${firstCls} ${secondCls} ${mediaClassList.join(' ')} ${classStr}`}>
     <slot />
-</div>
+</Element>

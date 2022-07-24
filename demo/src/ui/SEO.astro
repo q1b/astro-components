@@ -99,8 +99,9 @@ const title = [Astro.props?.title, "Position Astro Component | Position Element"
 <!-- Assets -->
 <slot name="assets"></slot>
 
-<!-- Avoiding Foc -->
+<script defer data-domain="unstylied-components.vercel.app" src="https://plausible.io/js/plausible.js"></script>
 
+<!-- Avoiding Foc -->
 <script>
     if (
         localStorage.getItem("theme-preference") === "dark" ||

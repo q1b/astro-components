@@ -1,0 +1,150 @@
+---
+export interface props extends propstype {
+}
+type SimpleProps = {
+    class?: string;
+    col?: boolean;
+    reverse?: boolean;
+    center?: boolean;
+    top?: boolean;
+    left?: boolean;
+    bottom?: boolean;
+    right?: boolean;
+    stretch?: boolean;
+    stretchX?: boolean;
+    stretchY?: boolean;
+    apart?: boolean | "loosely" | "closely";
+}
+
+
+const mediaPoints = ['sm', 'md', 'lg', 'xl', '2xl'] as const;
+
+type MediaProps = `${(typeof mediaPoints)[number]}:${keyof Omit<SimpleProps, 'class'>}`
+
+type PropsType = SimpleProps & {
+    [Key in MediaProps]?: [Key extends "sm:apart" | "md:apart" | "lg:apart" | "xl:apart" | "2xl:apart" ? SimpleProps['apart'] : boolean][number]
+}
+
+let {
+    center,
+    col,
+    apart,
+    reverse,
+    top,
+    left,
+    bottom,
+    right,
+    class: classStr,
+    stretch,
+    stretchX,
+    stretchY,
+    ...otherProps
+} = Astro.props as Props;
+
+Object.keys(otherProps).forEach(key => {
+    if (key.startsWith('sm:') || key.startsWith('md:') || key.startsWith('lg:') || key.startsWith('xl:') || key.startsWith('2xl:')) {
+        const [media, prop] = key.split(':');
+        if (prop === 'apart') {
+        } else {
+        }
+    }
+});
+
+if (col) {
+    [top, left] = [left, top];
+    [bottom, right] = [right, bottom];
+    [stretchX, stretchY] = [stretchY, stretchX];
+}
+
+// code for direction
+let dir = 'row';
+
+if (col && reverse) dir = "column-reverse";
+else if (!col && reverse) dir = "row-reverse";
+else if (col) dir = "column";
+
+let alignItem = "flex-start";
+let justifyContent = "justify-start";
+
+if (top && left) {
+    alignItem = "flex-start";
+    justifyContent = "flex-start";
+} else if (top && right) {
+    alignItem = "flex-start";
+    justifyContent = "flex-end";
+} else if (bottom && left) {
+    alignItem = "flex-end";
+    justifyContent = "flex-start";
+} else if (bottom && right) {
+    alignItem = "flex-end";
+    justifyContent = "flex-end";
+} else if (top) {
+    alignItem = "flex-start";
+    justifyContent = "center";
+} else if (left) {
+    alignItem = "center";
+    justifyContent = "flex-start";
+} else if (right) {
+    alignItem = "center";
+    justifyContent = "flex-end";
+} else if (bottom) {
+    alignItem = "flex-end";
+    justifyContent = "center";
+} else if (center && !top && !left && !right && !bottom) {
+    alignItem = "center";
+    justifyContent = "center";
+} else {
+    alignItem = "flex-start";
+    justifyContent = "center";
+}
+
+if (stretch || (stretchX && stretchY)) {
+    alignItem = "stretch";
+    justifyContent = "[&>*]:grow";
+    // return `${alignItem} ${justifyContent}`
+} else if (stretchX) {
+    justifyContent = "[&>*]:grow";
+    if (apart) {
+        if (apart === "closely") justifyContent = "space-evenly";
+        else if (apart === "loosely") justifyContent = "space-around";
+        else justifyContent = "space-between";
+    }
+} else if (stretchY) {
+    alignItem = "stretch";
+    if (apart) {
+        if (apart === "closely") justifyContent = "space-evenly";
+        else if (apart === "loosely") justifyContent = "space-around";
+        else justifyContent = "space-between";
+    }
+} else {
+    if (apart) {
+        if (apart === "closely") justifyContent = "space-evenly";
+        else if (apart === "loosely") justifyContent = "space-around";
+        else justifyContent = "space-between";
+    }
+}
+
+---
+
+<style define:vars={{ dir ,alignItem, justifyContent }}>
+    .cls {
+        display: flex;
+        flex-direction: var(--dir);
+        align-items: var(--alignItem);
+        justify-content: var(--justifyContent);
+    }
+
+    @media (min-width: 640px) {
+        .cls {
+            align-items: flex-start;
+        }
+    }
+
+    .\[\&\>\*\]\:grow>* {
+        flex-grow: 1;
+    }
+</style>
+
+<div class={`flex ${dir} ${alignItem} ${justifyContent} ${classStr}`}>
+    <slot />
+</div>
