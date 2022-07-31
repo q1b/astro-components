@@ -1,8 +1,6 @@
 ---
-import './index.css'
-
-export interface Props extends PropsType {
-}
+// export interface Props extends PropsType {
+// }
 
 type SimpleProps = {
     as?: keyof HTMLElementTagNameMap;
@@ -25,7 +23,7 @@ const mediaPoints = ['sm', 'md', 'lg', 'xl', '2xl'] as const;
 
 type MediaProps = `${(typeof mediaPoints)[number]}:${keyof Omit<Omit<SimpleProps, 'class'>, 'as'>}`
 
-type PropsType = SimpleProps & {
+export type Props = SimpleProps & {
     [Key in MediaProps]?: [Key extends "sm:apart" | "md:apart" | "lg:apart" | "xl:apart" | "2xl:apart" ? SimpleProps['apart'] : boolean][number]
 }
 
@@ -188,9 +186,6 @@ for (let index = 0; index < mediaArr.length; index++) {
     })
 }
 ---
-
-<style is:global>
-</style>
 
 <Element class={`flex ${dir} ${firstCls} ${secondCls} ${mediaClassList.join(' ')} ${classStr}`}>
     <slot />
