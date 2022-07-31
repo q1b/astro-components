@@ -38,6 +38,8 @@
   "dependencies": {
     "@iconify/json": "^2.1.77",
     "smartypants": "^0.1.6",
-    "unplugin-icons": "^0.14.7"
+    "unplugin-icons": "^0.14.7",
+    "rough-notation":"^0.5.1"
+
   }
 }

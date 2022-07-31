@@ -7,6 +7,7 @@ export interface Props extends PropsType {
 type SimpleProps = {
     as?: keyof HTMLElementTagNameMap;
     class?: string;
+    row?: boolean;
     col?: boolean;
     reverse?: boolean;
     center?: boolean;
@@ -28,12 +29,11 @@ type PropsType = SimpleProps & {
     [Key in MediaProps]?: [Key extends "sm:apart" | "md:apart" | "lg:apart" | "xl:apart" | "2xl:apart" ? SimpleProps['apart'] : boolean][number]
 }
 
-const mediaMap = new Map()
-
 let {
     as: Element = 'div',
     center,
     col,
+    row,
     apart,
     reverse,
     top,
@@ -47,6 +47,8 @@ let {
     ...otherProps
 } = Astro.props as Props;
 
+const mediaMap = new Map()
+
 Object.keys(otherProps).forEach(key => {
     if (key.startsWith('sm:') || key.startsWith('md:') || key.startsWith('lg:') || key.startsWith('xl:') || key.startsWith('2xl:')) {
         const [media, prop] = key.split(':');
@@ -56,9 +58,10 @@ Object.keys(otherProps).forEach(key => {
     }
 });
 
-const generatorCls = (prefix = '', genprops: { col?: boolean, reverse?: boolean, top?: boolean, left?: boolean, right?: boolean, bottom?: boolean, center?: boolean; stretch?: boolean, stretchX?: boolean, stretchY?: boolean, apart?: boolean | 'closely' | 'loosely' }) => {
+const generatorCls = (prefix = '', genprops: { col?: boolean, row?: boolean, reverse?: boolean, top?: boolean, left?: boolean, right?: boolean, bottom?: boolean, center?: boolean; stretch?: boolean, stretchX?: boolean, stretchY?: boolean, apart?: boolean | 'closely' | 'loosely' }) => {
     let {
         center,
+        row,
         col,
         apart,
         reverse,
@@ -82,7 +85,9 @@ const generatorCls = (prefix = '', genprops: { col?: boolean, reverse?: boolean,
 
     if (col && reverse) dir = "flex-col-reverse";
     else if (!col && reverse) dir = "flex-row-reverse";
+    else if (row && reverse) dir = "flex-row-reverse";
     else if (col) dir = "flex-col";
+    else if (row) dir = "flex-row";
 
     let firstCls;
     let secondCls;
@@ -162,6 +167,7 @@ const generatorCls = (prefix = '', genprops: { col?: boolean, reverse?: boolean,
 const [dir, firstCls, secondCls] = generatorCls('', {
     center,
     col,
+    row,
     apart,
     reverse,
     top,
@@ -182,6 +188,9 @@ for (let index = 0; index < mediaArr.length; index++) {
     })
 }
 ---
+
+<style is:global>
+</style>
 
 <Element class={`flex ${dir} ${firstCls} ${secondCls} ${mediaClassList.join(' ')} ${classStr}`}>
     <slot />

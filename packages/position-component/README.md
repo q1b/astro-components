@@ -71,4 +71,24 @@ import { Position } from 'position-component'
 | stretchY | `true` \| `false`                                       |
 | apart    | `true` \| `false` <br/> \| 'loosely' <br/> \| 'closely' |
 
+Also, there is now media Break Points support So, if you are familiar with tailwindcss or windicss or unocss, you can add before any class `sm:`,`md:`,`lg:`,`xl:`,`2xl:` to apply it after a specified view width according to table like, `right sm:left` now, this will `right` until view width crossed `sm:` ( 640px ) then, it applied `left`
+
+here, is the complete table with mediaBreaks Information
+
+<details open>
+<summary>Checkout the breakpoint table here, </summary>
+<br/>
+
+| Breakpoint | width after which styles will take effect |
+| ---------- | ----------------------------------------- |
+| sm         | 640px                                     |
+| md         | 768px                                     |
+| lg         | 1024px                                    |
+| xl         | 1280px                                    |
+| 2xl        | 1536px                                    |
+
+</details>
+
+<br/>
+
 play around props here, [https://unstylied-components.vercel.app/](https://unstylied-components.vercel.app/)

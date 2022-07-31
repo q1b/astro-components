@@ -87,18 +87,17 @@ This example is positioning the elements apart from each other, placing them far
 
 </Position>
 
-| Props    | Valid Values                                            | Status                  |
-| -------- | ------------------------------------------------------- | ----------------------- |
-| class    | string                                                  | -                       |
-| col      | `true` \| `false`                                       | -                       |
-| reverse  | `true` \| `false`                                       | -                       |
-| top      | `true` \| `false`                                       | -                       |
-| center   | `true` \| `false`                                       | -                       |
-| bottom   | `true` \| `false`                                       | -                       |
-| left     | `true` \| `false`                                       | -                       |
-| right    | `true` \| `false`                                       | -                       |
-| stretchX | `true` \| `false`                                       | Currently Experiemental |
-| stretchY | `true` \| `false`                                       | Currently Experiemental |
-| apart    | `true` \| `false` <br/> \| 'loosely' <br/> \| 'closely' | -                       |
-
-<!--                      | [stretch](#heap-sort)       | boolean (`true` \| `false`) | -   | -->
+| Props    | Default | Options                             | Description                                                                                                                                                                                                                                                        |
+| -------- | ------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| as       | `div`   | `String`                            | The element tag name that you pass should render in the output html                                                                                                                                                                                                |
+| class    | `flex`  | `String`                            | same as html attribute just comes with a prefilled flex class                                                                                                                                                                                                      |
+| col      | `false` | `Boolean`                           | changes the flex-direction from `row` to `column`                                                                                                                                                                                                                  |
+| reverse  | `false` | `Boolean`                           | Reverse the order and direction in which items are placed                                                                                                                                                                                                          |
+| top      | `false` | `Boolean`                           | Place the child elements to the `Top` of the container                                                                                                                                                                                                             |
+| center   | `true`  | `Boolean`                           | Place the child elements to the `Center` of the container                                                                                                                                                                                                          |
+| bottom   | `false` | `Boolean`                           | Place the child elements to the `Bottom` of the container                                                                                                                                                                                                          |
+| left     | `false` | `Boolean`                           | Place the child elements to the `Left` of the container                                                                                                                                                                                                            |
+| right    | `false` | `Boolean`                           | Place the child elements to the `Right` of the container                                                                                                                                                                                                           |
+| stretchX | `false` | `Boolean`                           | Stretch the child elements in the X direction                                                                                                                                                                                                                      |
+| stretchY | `false` | `Boolean`                           | Stretch the child elements in the Y direction                                                                                                                                                                                                                      |
+| apart    | `false` | `Boolean` \| 'loosely' \| 'closely' | Set elements `far most` in case of `true`, otherwise place them, `evenly` in case of `closely` and in the case of `loosely`, directly taken from `mdn` -> The Empty space before the first and after the last item = space between each pair of adjacent items / 2 |

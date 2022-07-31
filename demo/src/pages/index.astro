@@ -30,6 +30,15 @@ const footerLinks = [
 ]
 ---
 
+<script>
+    import { annotate } from 'rough-notation';
+    // Or using unpkg
+    // import { annotate } from 'https://unpkg.com/rough-notation?module';
+
+    const e = document.querySelector('#main-title') as HTMLElement;
+    const annotation = annotate(e, { type: 'underline', iterations: 1 });
+    annotation.show();
+</script>
 <Layout title="Unstylied Component | Position Component"
     description="Unstylied Component based on mordern flexbox properties just find useful for my project, hope you also enjoy using it.">
     <!-- <main
@@ -44,8 +53,8 @@ const footerLinks = [
 		</div>
 	</main> -->
     <Position col center class="px-4 h-96 global-max-width max-w-4xl w-full gap-4 min-h-[216px] mb-10">
-        <h1 class="select-none text-xl sm:text-2xl md:text-4xl sm:w-max font-black text-slate-700 dark:text-white">
-            Unstylied Reuseable Components
+        <h1 class="select-none text-xl sm:text-2xl md:text-4xl sm:w-max font-black text-slate-700 dark:text-white mb-2">
+            <span id="main-title"> Unstylied Reuseable </span> Components
         </h1>
         <p class="select-none text-xs sm:text-sm sm:w-max text-slate-400 dark:text-white">Based on <span
                 class=" decoration-wavy decoration-slate-400 underline">Flexbox CSS</span> Property, but
@@ -151,7 +160,9 @@ const footerLinks = [
             let t = ','
             if(footerLinks.length - 1 === index) t = ''
             if(footerLinks.length - 2 === index) t = 'and'
-            return <><a href={url} class={`underline underline-offset-2 hover:decoration-2 ${cls}`}>{label}</a>{t}</>
+            return <>
+                <a href={url} class={`underline underline-offset-2 hover:decoration-2 ${cls}`}>{label}</a>{t}
+            </>
             })}</Position>
     </footer>
 </Layout>

@@ -37,6 +37,7 @@ importers:
       remark-breaks: ^3.0.2
       remark-directive: ^2.0.1
       remark-gfm: ^3.0.1
+      rough-notation: ^0.5.1
       roving-ux: ^1.0.4
       smartypants: ^0.1.6
       solid-a11y: ^0.3.0
@@ -46,6 +47,7 @@ importers:
       unplugin-icons: ^0.14.7
     dependencies:
       '@iconify/json': 2.1.80
+      rough-notation: 0.5.1
       smartypants: 0.1.6
       unplugin-icons: 0.14.7
     devDependencies:
@@ -3968,6 +3970,10 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /rough-notation/0.5.1:
+    resolution: {integrity: sha512-ITHofTzm13cWFVfoGsh/4c/k2Mg8geKgBCwex71UZLnNuw403tCRjYPQ68jSAd37DMbZIePXPjDgY0XdZi9HPw==}
+    dev: false
 
   /roving-ux/1.0.4:
     resolution: {integrity: sha512-9hVfHRUxaNhK0PBXwXtBTPCZzHoqjF8pwtAcWZkJnoQxzi9u3txCUKUkMQqzIRbfMQI/yhY28UW3f1NCkHzIZA==}
