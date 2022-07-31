@@ -5,10 +5,12 @@
 	"type": "module",
 	"exports": {
 		".": "./index.js",
-		"./Position": "./Position.astro"
+		"./Position": "./Position.astro",
+        "./index.css":"./index.css"
 	},
 	"files": [
 		"index.js",
+        "index.css",
 		"Position.astro"
 	],
 	"keywords": [
